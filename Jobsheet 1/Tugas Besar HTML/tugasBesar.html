@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Tugas Besar HTML</title>
+        <style>  
+            .submit-container {
+                text-align: center; 
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <form method="POST">
+            <fieldset>
+                <legend>Data Mahasiswa</legend>
+                <label for="name">Nama:</label>
+                <input type="text" name="name"><br><br>
+
+                <label for="email">Email:</label>
+                <input type="email" name="email"><br><br>
+
+                <label for="date">Tanggal Lahir:</label>
+                <input type="date" name="dob"><br><br>
+
+                <label for="gender">Jenis Kelamin:</label>
+                <select name="gender">
+                    <option value="Laki-Laki">Laki-Laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select><br><br>
+
+                <label for="address">Alamat:</label><br>
+                <textarea name="address" rows="4" cols="50"></textarea>
+            </fieldset>
+
+            <fieldset>
+                <legend>Komentar</legend>
+                <label for="source">Darimana Anda mengetahui buku ini?</label>
+                <select name="source">
+                    <option value="Google">Google</option>
+                </select><br><br>
+
+                <label>Bagaimana Menurut anda terhadap buku ini?</label><br>
+                <input type="radio" name="var1" value="Biasa">
+                <label for="biasa">Biasa</label>
+                <input type="radio" name="var2" value="Bagus">
+                <label for="bagus">Bagus</label>
+                <input type="radio" name="var3" value="Menarik">
+                <label for="menarik">Menarik</label><br><br>
+
+                <label for="comment">Komentar Anda:</label><br>
+                <textarea id="comment" name="comment" rows="4" cols="50"></textarea><br><br>
+                <input type="checkbox" name="email_updates" checked>
+                <label for="email_updates">Kirim ke Email bila ada info terbaru</label><br>
+            </fieldset> <br>
+            <div class="submit-container">
+                <button type="submit">Kirim</button>
+            </div>
+        </form>
+    </body>
+</html>
