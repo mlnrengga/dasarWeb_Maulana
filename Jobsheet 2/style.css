@@ -18,6 +18,7 @@ body {
     padding: 20px;
     box-sizing: border-box;
     display: flex;
+    background-color: lightblue;
 }
 
 .kolom-utama{
