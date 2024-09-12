@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tugas Besar JavaScript</title>
+    <script>
+        function formValidasi() {
+            var firstName = document.getElementById("firstName").value.trim();
+            var lastName = document.getElementById("lastName").value.trim();
+            
+            if (firstName === "" && lastName === "") {
+                alert("First and Last Name can't be empty");
+                return false;
+            } else if (firstName === "") {
+                alert("First Name can't be empty");
+                return false;
+            } else if (lastName === "") {
+                alert("Last Name can't be empty");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="return formValidasi()">
+        <label for="firstName">First Name :</label>
+        <input type="text" id="firstName" name="firstName"><br><br>
+        <label for="lastName">Last Name :</label>
+        <input type="text" id="lastName" name="lastName"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
