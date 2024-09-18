@@ -29,4 +29,15 @@ echo "apakah $a lebih kecil dari pada (<) $b? " . var_export($hasilLebihKecil, t
 echo "apakah $a lebih besar dari pada (>) $b? " . var_export($hasilLebihBesar, true) . "<br>";
 echo "apakah $a lebih kecil atau sama dengan (=>)  $b? " . var_export($hasilLebihKecilSama, true) . "<br>";
 echo "apakah $a lebih besar atau sama dengan (>=) $b? " . var_export($hasilLebihBesarSama, true) . "<br>";
+
+$hasilAnd = $a && $b;
+$hasilOr = $a || $b;
+$hasilNotA = !$a;
+$hasilNotB = !$b;
+
+echo "hasil \$a && \$b adalah " . var_export($hasilAnd, true) . "<br>";
+echo "hasil \$a || \$b adalah " . var_export($hasilOr, true) . "<br>";
+echo "hasil !\$a adalah " . var_export($hasilNotA, true) . "<br>";
+echo "hasil !\$b adalah " . var_export($hasilNotB, true) . "<br>";
+
 ?>
