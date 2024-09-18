@@ -51,4 +51,9 @@ echo "hasil pembagian dan penugasan (/=) kedua variable adalah $a <br>";
 $a %= $b;
 echo "hasil modulus dan penugasan (%=) kedua variable adalah $a <br>";
 
+$hasilIdentik = $a === $b;
+$hasilTidakIdentik = $a !== $b;
+
+echo "apakah $a identik dengan $b? " . var_export($hasilIdentik, true) . "<br>";
+echo "apakah $a tidak identik dengan $b? " . var_export($hasilTidakIdentik, true) . "<br>";
 ?>
