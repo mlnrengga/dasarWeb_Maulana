@@ -40,4 +40,15 @@ echo "hasil \$a || \$b adalah " . var_export($hasilOr, true) . "<br>";
 echo "hasil !\$a adalah " . var_export($hasilNotA, true) . "<br>";
 echo "hasil !\$b adalah " . var_export($hasilNotB, true) . "<br>";
 
+$a += $b;
+echo "hasil penjumlahan dan penugasan (+=) kedua variable adalah $a <br>";
+$a -= $b;
+echo "hasil pengurangan dan penugasan (-=) kedua variable adalah $a <br>";
+$a *= $b;
+echo "hasil perkalian dan penugasan (*=) kedua variable adalah $a <br>";
+$a /= $b;
+echo "hasil pembagian dan penugasan (/=) kedua variable adalah $a <br>";
+$a %= $b;
+echo "hasil modulus dan penugasan (%=) kedua variable adalah $a <br>";
+
 ?>
