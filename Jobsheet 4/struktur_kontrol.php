@@ -10,7 +10,6 @@ if ($nilaiNumerik >= 90 && $nilaiNumerik <= 100) {
 } elseif ($nilaiNumerik < 70) {
     echo "Nilai huruf: D";
 }
-echo ("<br>");
 
 $jarakSaatIni = 0;
 $jarakTarget = 500;
@@ -49,4 +48,15 @@ echo "Jumlah lahan: $jumlahLahan <br>";
 echo "Jumlah tanaman per lahan: $tanamanPerLahan<br>";
 echo "Jumlah buah per tanaman: $buahPerTanaman<br>";
 echo "Jumlah buah yang akan dipanen adalah: $jumlahBuah";
+echo "<br>";
+
+$skorUjian = [85, 92, 78, 96, 88];
+$totalSkor = 0;
+
+foreach ($skorUjian as $skor) {
+    echo "Skor ujian: $skor <br>";
+    $totalSkor += $skor;
+}
+
+echo "Total skor ujian adalah: $totalSkor";
 ?>
