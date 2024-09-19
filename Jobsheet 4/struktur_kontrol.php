@@ -87,4 +87,17 @@ foreach ($nilaiSiswa1 as $nilai1) {
 }
 
 echo "Nilai rata-rata dari siswa adalah " . ($totalNilai/6);
+
+$hargaProduk = 120000;
+$diskon = 0;
+
+if ($hargaProduk > 100000) {
+    $diskon = 0.2 * $hargaProduk;
+}
+
+$totalBayar = $hargaProduk - $diskon;
+
+echo "Harga produk: Rp$hargaProduk <br>";
+echo "Diskon yang didapatkan: Rp$diskon <br>";
+echo "Total yang harus dibayar: Rp$totalBayar <br>";
 ?>
