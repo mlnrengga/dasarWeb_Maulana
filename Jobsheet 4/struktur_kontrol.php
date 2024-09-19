@@ -100,4 +100,11 @@ $totalBayar = $hargaProduk - $diskon;
 echo "Harga produk: Rp$hargaProduk <br>";
 echo "Diskon yang didapatkan: Rp$diskon <br>";
 echo "Total yang harus dibayar: Rp$totalBayar <br>";
+
+$skor = 500;
+
+$hadiah = ($skor > 500) ? "YA" : "TIDAK";
+
+echo "Skor yang di dapatkan: $skor poin <br>";
+echo "Apakah mendapatkan hadiah (YA/TIDAK): $hadiah";
 ?>
