@@ -71,4 +71,20 @@ foreach ($nilaiSiswa as $nilai) {
 
     echo "Nilai: $nilai (Lulus) <br>";
 }
+
+$nilaiSiswa1 = [85, 92, 78, 64, 90, 75, 88, 79, 70, 96];
+$totalNilai = 0;
+
+sort($nilaiSiswa1);
+array_shift($nilaiSiswa1);
+array_shift($nilaiSiswa1);
+array_pop($nilaiSiswa1);
+array_pop($nilaiSiswa1);
+
+foreach ($nilaiSiswa1 as $nilai1) {
+    echo "Nilai-nilai siswa $nilai1 <br>";
+    $totalNilai += $nilai1;
+}
+
+echo "Nilai rata-rata dari siswa adalah " . ($totalNilai/6);
 ?>
