@@ -30,7 +30,7 @@ foreach ($daftarKaryawan as $karyawan) {
 }
 
 echo "Daftar karyawan dengan pengalaman kerja lebih dari 5 tahun: " . implode(', ', $karyawanPengalamanLimaTahun) . '<br>';
-echo "Daftar karyawan dengan pengalaman kerja kurang dari 5 tahun: " . implode(', ', $karyawanPengalamanKurangLimaTahun);
+echo "Daftar karyawan dengan pengalaman kerja kurang dari 5 tahun: " . implode(', ', $karyawanPengalamanKurangLimaTahun) . '<br>';
 
 $daftarNilai = [
     'Matematika' => [
@@ -56,5 +56,32 @@ echo "Daftar nilai mahasiswa dalam mata kuliah $mataKuliah: <br>";
 
 foreach ($daftarNilai[$mataKuliah] as $nilai) {
     echo "Nama: {$nilai[0]}, Nilai: {$nilai[1]} <br>";
+}
+
+$siswaNilai = [
+    ['Alice', 85],
+    ['Bob', 92],
+    ['Charlie', 78],
+    ['David', 64],
+    ['Eva', 90],
+];
+
+$totalNilai = 0;
+$jumlahSiswa = count($siswaNilai);
+
+foreach ($siswaNilai as $siswa) {
+    $totalNilai += $siswa[1];
+}
+
+$rataRata = $totalNilai / $jumlahSiswa;
+
+echo "Rata-rata nilai siswa: " . $rataRata . "<br>";
+
+echo "Daftar siswa dengan nilai di atas rata-rata:<br>";
+
+foreach ($siswaNilai as $siswa) {
+    if ($siswa[1] > $rataRata) {
+        echo "Nama: {$siswa[0]}, Nilai: {$siswa[1]}<br>";
+    }
 }
 ?>
