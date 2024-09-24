@@ -33,5 +33,5 @@ function hitungUmur($thn_lahir, $thn_sekarang) {
     return $umur;
 }
 
-echo "Umur saya adalah ". hitungUmur(1988, 2023) ." tahun"; // isi sesuai dengan tahun lahir kalian
+echo "Umur saya adalah ". hitungUmur(2004, 2024) ." tahun"; // isi sesuai dengan tahun lahir kalian
 ?>
