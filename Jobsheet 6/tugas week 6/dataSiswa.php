@@ -66,9 +66,8 @@
         $rata2Umur = $totalumur / count($data); 
         ?>
     </table>
+    <h2>Rata-rata Umur Siswa: <?php echo round($rata2Umur,2); ?> tahun</h2>
 </div>
-
-<h2>Rata-rata Umur Siswa: <?php echo round($rata2Umur,2); ?> tahun</h2>
 
 <script>
     var btn = document.getElementById("btnCollapse");
