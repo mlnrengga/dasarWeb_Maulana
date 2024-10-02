@@ -20,13 +20,25 @@
         button {
             width: 100%;
             height: 50px;
-            border-color: white;
+            color: white;
+            border-color: grey;
             background-color: #5EC3DC;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-            border-bottom-right-radius: 8px;
-            border-bottom-left-radius: 8px;
+            border-radius: 8px;
+            box-shadow: 5px 5px 0px grey;
             font-weight: bold;  
+        }
+
+        button:hover {
+            background-color: white;
+            color: #5EC3DC;
+            border-color: grey;
+            box-shadow: 5px 5px 0px grey;
+        }
+
+        button:active {
+            box-shadow: none;
+            border-color: grey;
+            transform: translateY(4px);
         }
     </style>
 </head>
@@ -35,7 +47,7 @@
 <h1>Data Siswa</h1>
 
 <button id="btnCollapse">Klik untuk Menampilkan Data Siswa</button>
-<div id="dataTable" style="display:block;">
+<div id="dataTable" style="display:none;"> 
     <table>
         <tr>
             <th>Nama</th>
@@ -77,8 +89,10 @@
     btn.onclick = function() {
         if (table.style.display === "block") {
             table.style.display = "none";
+            btn.textContent = "Klik untuk Menampilkan Data Siswa"
         } else {
             table.style.display = "block";
+            btn.textContent = "Klik untuk Menyembunyikan Data Siswa";
         }
     };
 </script>
