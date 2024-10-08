@@ -16,8 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($selectedWarna)) {
         echo "Warna favorit Anda: " . implode(", ", $selectedWarna) . "<br>";
     } else {
-        echo "Anda   
- tidak memilih warna favorit.<br>";
+        echo "Anda tidak memilih warna favorit.<br>";
     }
 
     echo "Jenis kelamin Anda: " . $selectedJenisKelamin;
