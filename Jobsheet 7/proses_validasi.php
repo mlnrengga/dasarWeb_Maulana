@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Format email tidak valid.";
     }
 
-    // Jika ada kesalahan validasi
+    // Jika ada kesalahan validasid
     if (!empty($errors)) {
         foreach ($errors as $error) {
             echo $error . "<br>";
