@@ -17,9 +17,12 @@
         <input type="submit" value="Submit">
     </form>
 
+    <div id="hasil"></div>
+
     <script>
         $(document).ready(function() {
             $("#myForm").submit(function(event) {
+                event.preventDefault();                 
                 var nama = $("#nama").val();
                 var email = $("#email").val();
                 var valid = true;
@@ -38,8 +41,17 @@
                     $("#email-error").text("");
                 }
 
-                if (!valid) {
-                    event.preventDefault(); // Menghentikan pengiriman form jika validasi gagal
+                if (valid) {
+                    var formData = $("#myForm").serialize();
+
+                    $.ajax({
+                        url: "proses_validasi.php",
+                        type: "POST", 
+                        data: formData,
+                        success: function(response) {
+                            $("#hasil").html(response);
+                        },  
+                    });
                 }
             });
         });
