@@ -14,8 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validasi Email
     if (empty($email)) {
-        $errors[] = "Email harus diisi.";   
-
+        $errors[] = "Email harus diisi."; 
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Format email tidak valid.";
     }
@@ -28,8 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Lanjutkan dengan pemrosesan data jika semua validasi berhasil
         // Misalnya, menyimpan data ke database atau mengirim email
-        echo "Data berhasil dikirim: Nama = $nama, Email = $email";   
-
+        echo "Data berhasil dikirim: Nama = $nama, Email = $email";
     }
 }
 
