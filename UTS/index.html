@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alceena 2023</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #d4a373;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        .navbar img {
+            height: 40px;
+        }
+
+        .main-section {
+            display: flex;
+            height: calc(100vh - 80px); 
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-section {
+            background-color: #faedcd;
+            flex: 1;
+            padding: 60px 50px;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .content-section h1 {
+            font-size: 48px;
+            margin: 0 0 20px;
+        }
+
+        .content-section p {
+            font-size: 20px;
+            margin: 0 0 30px;
+        }
+
+        .content-section button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: white;
+            border: none;  
+            border-radius: 8px; 
+            font-weight: bold;
+        }
+
+        .content-section button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .image-options {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .image-options .option {
+            margin: 0 10px;
+            text-align: center;
+        }
+
+        .image-options img {
+            width: 230px;
+            height: 230px;
+            object-fit: cover;
+            display: block;
+            margin-bottom: 10px;
+            border: 2px solid #d4a373;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">ALCEENA'23</div>
+        <img src="alceena.png" alt="Logo">
+    </div>
+
+    <div class="main-section">
+        <div class="content-section">
+            <div class="image-options">
+                <div class="option">
+                    <img src="opsi1.jpeg" alt="Opsi 1">
+                    <p>Opsi 1</p>
+                </div>
+                <div class="option">
+                    <img src="opsi2.png" alt="Opsi 2">
+                    <p>Opsi 2</p>
+                </div>
+                <div class="option">
+                    <img src="opsi3.png" alt="Opsi 3">
+                    <p>Opsi 3</p>
+                </div>
+            </div>
+
+            <h1>Voting Baju Angkatan</h1>
+            <p>Pemilihan baju angkatan 2023 Alceena'23 </p>
+            <a href="form.php">
+                <button>Vote</button>
+            </a>
+            
+        </div>
+    </div>
+
+</body>
+</html>
