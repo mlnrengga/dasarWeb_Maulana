@@ -1,48 +1,41 @@
 <?php
-session_start(); // Memulai sesi
+session_start();
 
-// Menambahkan data default jika sesi belum ada
 if (!isset($_SESSION['data_mhs'])) {
     $_SESSION['data_mhs'] = [
         ['Adit Rendang', '2I', 'Sistem Informasi Bisnis', 'aditrd@gmail.com', 'Opsi 2'],
         ['Iqbal Suki', '2G', 'Teknik Informatika', 'Iqbal12@gmail.com',  'Opsi 1'],
         ['Leni Baut', '2B', 'Sistem Informasi Bisnis', 'Lenib4@gmail.com',  'Opsi 3']
-    ]; // Data default
+    ];
 }
 
-// Memeriksa apakah data telah dikirim melalui metode POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['reset'])) {
-        // Menghapus sesi untuk mengreset data
         unset($_SESSION['data_mhs']);
-        // Inisialisasi kembali data default
         $_SESSION['data_mhs'] = [
             ['Adit Rendang', '2I', 'Sistem Informasi Bisnis', 'aditrd@gmail.com', 'Opsi 2'],
             ['Iqbal Suki', '2G', 'Teknik Informatika', 'Iqbal12@gmail.com',  'Opsi 1'],
             ['Leni Baut', '2B', 'Sistem Informasi Bisnis', 'Lenib4@gmail.com',  'Opsi 3']
         ];
     } else {
-        // Mendapatkan data dari form
         $nama = $_POST['nama'];
         $kelas = $_POST['kelas'];
         $jurusan = $_POST['jurusan'];
         $email = $_POST['email'];
         $opsi = isset($_POST['opsi']) ? $_POST['opsi'] : '';
 
-        // Validasi email
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             echo "<div class='container mt-4'>";
             echo "<div class='alert alert-danger'>Email tidak valid. Silakan kembali dan masukkan email yang benar.</div>";
             echo "</div>";
         } else {
-            // Menambahkan data baru ke dalam array sesi jika email valid
+
             $_SESSION['data_mhs'][] = [$nama, $kelas, $jurusan, $email, $opsi];
         }
     }
 }
 
-// Menyiapkan data siswa untuk ditampilkan
-$data_mhs = $_SESSION['data_mhs']; // Ambil data dari sesi
+$data_mhs = $_SESSION['data_mhs'];
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +75,6 @@ $data_mhs = $_SESSION['data_mhs']; // Ambil data dari sesi
             </thead>
             <tbody>
                 <?php
-                // Menampilkan data siswa dari sesi
                 foreach ($data_mhs as $siswa) {
                     echo "<tr>";
                     foreach ($siswa as $item) {
