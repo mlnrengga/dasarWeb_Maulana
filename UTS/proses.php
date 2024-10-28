@@ -1,5 +1,4 @@
 <?php
-// Konfigurasi koneksi database
 $config = [
     "serverName" => "RENGGA", 
     "database" => "vote"   
