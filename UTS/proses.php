@@ -1,41 +1,69 @@
 <?php
-session_start();
+// Konfigurasi koneksi database
+$config = [
+    "serverName" => "RENGGA", 
+    "database" => "vote"   
+];
 
-if (!isset($_SESSION['data_mhs'])) {
-    $_SESSION['data_mhs'] = [
-        ['Adit Rendang', '2I', 'Sistem Informasi Bisnis', 'aditrd@gmail.com', 'Opsi 2'],
-        ['Iqbal Suki', '2G', 'Teknik Informatika', 'Iqbal12@gmail.com',  'Opsi 1'],
-        ['Leni Baut', '2B', 'Sistem Informasi Bisnis', 'Lenib4@gmail.com',  'Opsi 3']
-    ];
+$conn = sqlsrv_connect($config['serverName'], [
+    "Database" => $config['database']
+]);
+
+if ($conn === false) {
+    die(print_r(sqlsrv_errors(), true));
+}
+
+if (isset($_GET['delete_row'])) {
+    $deleteRow = $_GET['delete_row'];
+    $deleteSql = "DELETE FROM mhs WHERE email = ?"; 
+    $deleteStmt = sqlsrv_query($conn, $deleteSql, array($deleteRow));
+    
+    if ($deleteStmt === false) {
+        die(print_r(sqlsrv_errors(), true));
+    } else {
+        echo "<div class='container mt-4'>";
+        echo "<div class='alert alert-info'>Data berhasil dihapus</div>";
+        echo "</div>";
+    }
+
+    sqlsrv_free_stmt($deleteStmt);
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['reset'])) {
-        unset($_SESSION['data_mhs']);
-        $_SESSION['data_mhs'] = [
-            ['Adit Rendang', '2I', 'Sistem Informasi Bisnis', 'aditrd@gmail.com', 'Opsi 2'],
-            ['Iqbal Suki', '2G', 'Teknik Informatika', 'Iqbal12@gmail.com',  'Opsi 1'],
-            ['Leni Baut', '2B', 'Sistem Informasi Bisnis', 'Lenib4@gmail.com',  'Opsi 3']
-        ];
+    $nama = $_POST['nama'];
+    $kelas = $_POST['kelas'];
+    $jurusan = $_POST['jurusan'];
+    $email = $_POST['email'];
+    $opsi = isset($_POST['opsi']) ? $_POST['opsi'] : '';
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "<div class='container mt-4'>";
+        echo "<div class='alert alert-danger'>Email tidak valid. Silakan kembali dan masukkan email yang benar.</div>";
+        echo "</div>";
     } else {
-        $nama = $_POST['nama'];
-        $kelas = $_POST['kelas'];
-        $jurusan = $_POST['jurusan'];
-        $email = $_POST['email'];
-        $opsi = isset($_POST['opsi']) ? $_POST['opsi'] : '';
+        $insertSql = "INSERT INTO mhs (nama, kelas, jurusan, email, opsi) VALUES (?, ?, ?, ?, ?)";
+        $params = array($nama, $kelas, $jurusan, $email, $opsi);
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo "<div class='container mt-4'>";
-            echo "<div class='alert alert-danger'>Email tidak valid. Silakan kembali dan masukkan email yang benar.</div>";
-            echo "</div>";
-        } else {
-
-            $_SESSION['data_mhs'][] = [$nama, $kelas, $jurusan, $email, $opsi];
+        $insertStmt = sqlsrv_query($conn, $insertSql, $params);
+        if ($insertStmt === false) {
+            die(print_r(sqlsrv_errors(), true));
         }
+        sqlsrv_free_stmt($insertStmt);
     }
 }
+$data_mhs = [];
+$selectSql = "SELECT * FROM mhs";
+$selectStmt = sqlsrv_query($conn, $selectSql);
+if ($selectStmt === false) {
+    die(print_r(sqlsrv_errors(), true));
+}
 
-$data_mhs = $_SESSION['data_mhs'];
+while ($row = sqlsrv_fetch_array($selectStmt, SQLSRV_FETCH_ASSOC)) {
+    $data_mhs[] = [$row['nama'], $row['kelas'], $row['jurusan'], $row['email'], $row['opsi']];
+}
+
+sqlsrv_free_stmt($selectStmt);
+sqlsrv_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +84,7 @@ $data_mhs = $_SESSION['data_mhs'];
 
             tbody {
                 backdrop-filter: blur(15px);
-                background: rgba(255,255,255,0,2);
+                background: rgba(255,255,255,0.2);
             }
     </style>
 </head>
@@ -71,15 +99,22 @@ $data_mhs = $_SESSION['data_mhs'];
                     <th>Jurusan</th>
                     <th>Email</th>
                     <th>Opsi</th>
+                    <th>Aksi</th> 
                 </tr>
             </thead>
             <tbody>
                 <?php
                 foreach ($data_mhs as $siswa) {
                     echo "<tr>";
-                    foreach ($siswa as $item) {
-                        echo "<td>" . htmlspecialchars($item) . "</td>";
-                    }
+                    echo "<td>" . htmlspecialchars($siswa[0]) . "</td>";
+                    echo "<td>" . htmlspecialchars($siswa[1]) . "</td>";
+                    echo "<td>" . htmlspecialchars($siswa[2]) . "</td>";
+                    echo "<td>" . htmlspecialchars($siswa[3]) . "</td>";
+                    echo "<td>" . htmlspecialchars($siswa[4]) . "</td>";
+                    echo "<td>";
+                    echo "<a href='edit.php?email=" . urlencode($siswa[3]) . "' class='btn btn-primary btn-sm'>Edit</a> "; 
+                    echo "<a href='?delete_row=" . urlencode($siswa[3]) . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Yakin ingin menghapus?\");'>Hapus</a>";
+                    echo "</td>";
                     echo "</tr>";
                 }
                 ?>
@@ -87,9 +122,6 @@ $data_mhs = $_SESSION['data_mhs'];
         </table>
         <div class="d-flex justify-content mt-4">
             <a href="form.php" class="btn btn-secondary mr-2">Kembali ke Formulir</a>
-        <form method="post">
-            <input type="submit" name="reset" value="Tabel Baru" class="btn btn-danger">
-        </form>
         </div>
     </div>
 </body>

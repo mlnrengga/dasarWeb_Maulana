@@ -31,38 +31,38 @@
                 <form action="proses.php" method="post">
                     <div class="form-group">
                         <label for="nama">Nama:</label>
-                        <input type="text" class="form-control" name="nama" id="nama">
+                        <input type="text" class="form-control" name="nama" id="nama" required>
                     </div>
 
                     <div class="form-group">
                         <label for="kelas">Kelas:</label>
-                        <input type="text" class="form-control" name="kelas" id="kelas">
+                        <input type="text" class="form-control" name="kelas" id="kelas" required>
                     </div>
 
                     <div class="form-group">
                         <label for="jurusan">Jurusan:</label>
-                        <input type="text" class="form-control" name="jurusan" id="jurusan">
+                        <input type="text" class="form-control" name="jurusan" id="jurusan" required>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" name="email" id="email">
+                        <input type="email" class="form-control" name="email" id="email" required>
                     </div>
 
                     <label for="opsi">Pilih Opsi:</label><br>
 
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="opsi1" name="opsi" class="custom-control-input" value="Opsi 1">
+                        <input type="radio" id="opsi1" name="opsi" class="custom-control-input" value="Opsi 1" required>
                         <label class="custom-control-label" for="opsi1">Opsi 1</label>
                     </div>
 
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="opsi2" name="opsi" class="custom-control-input" value="Opsi 2">
+                        <input type="radio" id="opsi2" name="opsi" class="custom-control-input" value="Opsi 2" required>
                         <label class="custom-control-label" for="opsi2">Opsi 2</label>
                     </div>
 
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="opsi3" name="opsi" class="custom-control-input" value="Opsi 3">
+                        <input type="radio" id="opsi3" name="opsi" class="custom-control-input" value="Opsi 3" required>
                         <label class="custom-control-label" for="opsi3">Opsi 3</label>
                     </div>
                     <div class="d-flex justify-content mt-4">
