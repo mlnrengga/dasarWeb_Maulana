@@ -40,16 +40,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "<div class='alert alert-danger'>Email tidak valid. Silakan kembali dan masukkan email yang benar.</div>";
         echo "</div>";
     } else {
-        $insertSql = "INSERT INTO mhs (nama, kelas, jurusan, email, opsi) VALUES (?, ?, ?, ?, ?)";
-        $params = array($nama, $kelas, $jurusan, $email, $opsi);
-
-        $insertStmt = sqlsrv_query($conn, $insertSql, $params);
-        if ($insertStmt === false) {
+        $checkEmailSql = "SELECT COUNT(*) as count FROM mhs WHERE email = ?";
+        $checkEmailStmt = sqlsrv_query($conn, $checkEmailSql, array($email));
+        
+        if ($checkEmailStmt === false) {
             die(print_r(sqlsrv_errors(), true));
         }
-        sqlsrv_free_stmt($insertStmt);
+        
+        $row = sqlsrv_fetch_array($checkEmailStmt, SQLSRV_FETCH_ASSOC);
+        if ($row['count'] > 0) {
+            echo "<div class='container mt-4'>";
+            echo "<div class='alert alert-danger'>Email sudah terdaftar. Silahkan gunakan email lain.</div>";
+            echo "</div>";
+        } else {
+            $insertSql = "INSERT INTO mhs (nama, kelas, jurusan, email, opsi) VALUES (?, ?, ?, ?, ?)";
+            $params = array($nama, $kelas, $jurusan, $email, $opsi);
+
+            $insertStmt = sqlsrv_query($conn, $insertSql, $params);
+            if ($insertStmt === false) {
+                die(print_r(sqlsrv_errors(), true));
+            }
+            sqlsrv_free_stmt($insertStmt);
+        }
+        
+        sqlsrv_free_stmt($checkEmailStmt);
     }
 }
+
 $data_mhs = [];
 $selectSql = "SELECT * FROM mhs";
 $selectStmt = sqlsrv_query($conn, $selectSql);

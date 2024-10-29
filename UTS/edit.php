@@ -37,21 +37,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
     $nama = $_POST['nama'];
     $kelas = $_POST['kelas'];
     $jurusan = $_POST['jurusan'];
-    $email = $_POST['email']; 
+    $newEmail = $_POST['email'];
     $opsi = isset($_POST['opsi']) ? $_POST['opsi'] : '';
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
         echo "<div class='container mt-4'>";
         echo "<div class='alert alert-danger'>Email tidak valid. Silakan kembali dan masukkan email yang benar.</div>";
         echo "</div>";
     } else {
-        $checkSql = "SELECT * FROM mhs WHERE email = ?";
-        $checkStmt = sqlsrv_query($conn, $checkSql, array($email));
+        $checkSql = "SELECT * FROM mhs WHERE email = ? AND email != ?";
+        $checkStmt = sqlsrv_query($conn, $checkSql, array($newEmail, $siswa['email']));
         
         if (sqlsrv_has_rows($checkStmt)) {
-            $updateSql = "UPDATE mhs SET nama = ?, kelas = ?, jurusan = ?, opsi = ? WHERE email = ?";
-            $params = array($nama, $kelas, $jurusan, $opsi, $email);
+            echo "<div class='container mt-4'>";
+            echo "<div class='alert alert-warning'>Email sudah terpakai oleh pengguna lain. Silakan gunakan email lain.</div>";
+            echo "</div>";
+        } else {
+            $updateSql = "UPDATE mhs SET nama = ?, kelas = ?, jurusan = ?, email = ?, opsi = ? WHERE email = ?";
+            $params = array($nama, $kelas, $jurusan, $newEmail, $opsi, $siswa['email']);
             $updateStmt = sqlsrv_query($conn, $updateSql, $params);
+
             if ($updateStmt === false) {
                 die(print_r(sqlsrv_errors(), true));
             } else {
@@ -61,10 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
             }
 
             sqlsrv_free_stmt($updateStmt);
-        } else {
-            echo "<div class='container mt-4'>";
-            echo "<div class='alert alert-danger'>Data tidak ditemukan. Tidak ada perubahan yang dilakukan.</div>";
-            echo "</div>";
         }
 
         sqlsrv_free_stmt($checkStmt);
@@ -74,7 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
 sqlsrv_close($conn);
 ?>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,23 +82,22 @@ sqlsrv_close($conn);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Data Mahasiswa</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
-
     <style>
-            body {
-                background-image: url('download.jpg');
-                height: 100vh;
-                background-position: center;
-                background-size: cover;
-            }
+        body {
+            background-image: url('download.jpg');
+            height: 100vh;
+            background-position: center;
+            background-size: cover;
+        }
 
-            .form-container {
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                padding: 20px;
-                box-shadow: 0px 0px 20px grey;   
-                backdrop-filter: blur(10px);
-            }
-        </style>
+        .form-container {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 0px 20px grey;   
+            backdrop-filter: blur(10px);
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -146,7 +145,8 @@ sqlsrv_close($conn);
                     <button type="submit" name="update" class="btn btn-primary mr-2">Update</button>
                     <a href="proses.php" class="btn btn-secondary">Kembali ke Tabel</a>
                 </div>
-        </form>
+            </form>
+        </div>
     </div>
 </body>
 </html>
